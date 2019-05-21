@@ -29,10 +29,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 startPosition= new Vector3(0.5f,1f,0.5f);
     private float translationZ;
     private float translationX;
-
+    private GameObject stats;
+    private bool resetPosition=true;
     void Awake()
     {
         this.transform.position = startPosition;
+        stats = GameObject.Find("GameManager");
     }
 
     void Update()
@@ -40,8 +42,27 @@ public class PlayerMovement : MonoBehaviour
         relativeZ=(int)this.transform.position.z;
         relativeX=(int)this.transform.position.x;
         MovementPlayer();
+        lifeCase();
     }
-   
+   void lifeCase()
+   {
+       switch(stats.GetComponent<GameManager>().GetLife())
+       {
+           case 1:
+           if(resetPosition)
+           {
+                this.transform.position = startPosition;
+                resetPosition=false;
+           }
+            
+           break;
+           case 0:
+          default:
+                resetPosition = true;
+            break;
+
+       }
+   }
     void MovementPlayer()
     {
         if(movementOn)

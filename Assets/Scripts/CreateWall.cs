@@ -10,9 +10,14 @@ public class CreateWall : MonoBehaviour
     private int cantWall;
     [SerializeField]
     private GameObject[] Walls;
+    [SerializeField]
+    private GameObject platform;
+    private GameObject instancePlatform;
     private float randomX;
     private float randomZ;
     private bool generateWall=true;
+    [SerializeField]
+    private int cantWallDefeat = 0;
     // Start is called before the first frame update
     void Awake()
     {
@@ -61,6 +66,8 @@ public class CreateWall : MonoBehaviour
             }
         
         }
+        randomX = Random.Range(0,9);
+        instancePlatform=Instantiate(platform, new Vector3 (Walls[(int)randomX].transform.position.x,0.5f,Walls[(int)randomX].transform.position.z),Quaternion.identity);
 
     }
     void Start()
@@ -71,6 +78,17 @@ public class CreateWall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       cantWallDefeat = 0;
+        for(int i = 0 ; i <cantWall; i++)
+        {
+            if(!Walls[i].gameObject.activeSelf)
+            {
+                cantWallDefeat++;
+            }
+        }
+        if(cantWallDefeat == 10)
+        {
+            instancePlatform.GetComponent<Platform>().active=true;
+        }
     }
 }

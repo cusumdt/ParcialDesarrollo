@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - DestructibleWall
+  - Pj
+  - Platform
+  - Bomb
+  - GeneralWall
+  - Enemy
   layers:
   - Default
   - TransparentFX

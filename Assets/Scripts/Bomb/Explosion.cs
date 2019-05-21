@@ -10,7 +10,7 @@ public class Explosion : MonoBehaviour
     }
     IEnumerator TimeExplosion()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
         Debug.Log("Se apago el fuego");
         this.gameObject.SetActive(false);
     }

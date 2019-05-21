@@ -6,9 +6,12 @@ public class InstanceExplosion : MonoBehaviour
 {
     [SerializeField]
     private GameObject prefabExplosion;
+    [SerializeField]
+    private float life;
     private GameObject explosion;
-
+    Collider trigger;
     public bool onExplosion = false;
+    
     void Awake()
     {   
         explosion = Instantiate(prefabExplosion, new Vector3(this.transform.position.x, 1f,this.transform.position.z) , Quaternion.identity);
@@ -16,7 +19,12 @@ public class InstanceExplosion : MonoBehaviour
     }
     void Start()
     {
-        
+           trigger = GetComponent<Collider>();
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        trigger.isTrigger = false;
     }
     void Update()
     {
@@ -25,7 +33,9 @@ public class InstanceExplosion : MonoBehaviour
         {
             
             explosion.SetActive(true);
+            explosion.transform.position = new Vector3 (this.transform.position.x, 1f,this.transform.position.z);
             onExplosion=false;
+            trigger.isTrigger = true;
             Debug.Log("Explote");
             this.gameObject.SetActive(false);
         }
@@ -39,7 +49,7 @@ public class InstanceExplosion : MonoBehaviour
     IEnumerator TimeBomb()
     {
         
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(life);
         onExplosion = true;
 
     }
