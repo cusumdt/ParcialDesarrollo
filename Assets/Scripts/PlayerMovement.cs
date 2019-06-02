@@ -81,21 +81,13 @@ public class PlayerMovement : MonoBehaviour
                         {
                             if(Input.GetKeyDown("w") || Input.GetKeyDown("up") )
                             {
-                                movementOn=false;
-                                translationX = 0f;
-                                translationZ = 0f;
-                                transformOnVertical = true;
-                                activeX=true;
+                                SetStatusX();
                                 selectTransform = new Vector3(relativeX + 1f + addRelative, this.transform.position.y,relativeZ + 1.5f);
 
                             }
                             if(Input.GetKeyDown("s") || Input.GetKeyDown("down") )
                             {
-                                movementOn=false;
-                                translationX = 0f;
-                                translationZ = 0f;
-                                transformOnVertical = true;
-                                activeX=true;
+                                SetStatusX();
                                 selectTransform = new Vector3(relativeX + 1f + addRelative, this.transform.position.y,relativeZ - 0.5f);
 
                             }
@@ -107,23 +99,14 @@ public class PlayerMovement : MonoBehaviour
                          {
                              if(Input.GetKeyDown("w") || Input.GetKeyDown("up") )
                              {
-                                movementOn=false;
-                                translationX = 0f;
-                                translationZ = 0f;
-                                transformOnVertical = true;
-                                activeX=true;
+                                SetStatusX();
                                 selectTransform = new Vector3(relativeX - 0.5f, this.transform.position.y,relativeZ + 1.5f);
 
                             }
                              if(Input.GetKeyDown("s") || Input.GetKeyDown("down") )
                             {
-                                movementOn=false;
-                                translationX = 0f;
-                                translationZ = 0f;
-                                transformOnVertical = true;
-                                activeX=true;
+                                SetStatusX();
                                 selectTransform = new Vector3(relativeX - 0.5f, this.transform.position.y,relativeZ - 0.5f);
-
                             }
                         }
                     }                                         
@@ -144,21 +127,13 @@ public class PlayerMovement : MonoBehaviour
                     {
                         if(Input.GetKeyDown("d") || Input.GetKeyDown("right") && this.transform.position.x <9.5f)
                         {
-                            movementOn=false;
-                            translationX = 0f;
-                            translationZ = 0f;
-                            transformOn = true;
-                            activeZ=true;
+                            SetStatusZ();
                             selectTransform = new Vector3(relativeX + 1f + addRelative, this.transform.position.y,relativeZ + 1.5f);
     
                         }
                         if(Input.GetKeyDown("a") || Input.GetKeyDown("left") && this.transform.position.x > 0.5f)
                         {
-                            movementOn=false;
-                            translationX = 0f;
-                            translationZ = 0f;
-                            transformOn = true;
-                            activeZ=true;
+                            SetStatusZ();
                             selectTransform = new Vector3(relativeX - 1f + addRelative, this.transform.position.y,relativeZ + 1.5f);
     
                         }
@@ -167,21 +142,13 @@ public class PlayerMovement : MonoBehaviour
                     {
                          if(Input.GetKeyDown("d") || Input.GetKeyDown("right")  && this.transform.position.x <9.5f)
                          {
-                            movementOn=false;
-                            translationX = 0f;
-                            translationZ = 0f;
-                            transformOn = true;
-                            activeZ=true;
+                            SetStatusZ();
                             selectTransform = new Vector3(relativeX + 1f + addRelative, this.transform.position.y,relativeZ - 0.5f);
                             
                         }
                          if(Input.GetKeyDown("a") || Input.GetKeyDown("left") && this.transform.position.x > -0.5f )
                          {
-                            movementOn=false;
-                            translationX = 0f;
-                            translationZ = 0f;
-                            transformOn = true;
-                            activeZ=true;
+                            SetStatusZ();
                             selectTransform = new Vector3(relativeX - 1f + addRelative, this.transform.position.y,relativeZ - 0.5f);
                             
                         }
@@ -192,20 +159,12 @@ public class PlayerMovement : MonoBehaviour
                 {
                            if(Input.GetKeyDown("d") || Input.GetKeyDown("right")  && this.transform.position.x <9.5f)
                          {
-                            movementOn=false;
-                            translationX = 0f;
-                            translationZ = 0f;
-                            transformOn = true;
-                            activeZ=true;
+                            SetStatusZ();
                             selectTransform = new Vector3(relativeX + 1f + addRelative, this.transform.position.y , relativeZ + 0.5f); 
                         }
                            if(Input.GetKeyDown("a") || Input.GetKeyDown("left")  && this.transform.position.x >0.5f)
                          {
-                            movementOn=false;
-                            translationX = 0f;
-                            translationZ = 0f;
-                            transformOn = true;
-                            activeZ=true;
+                            SetStatusZ();
                             selectTransform = new Vector3(relativeX - 1f + addRelative, this.transform.position.y , relativeZ + 0.5f); 
                         }
                 }
@@ -230,10 +189,13 @@ public class PlayerMovement : MonoBehaviour
                         this.transform.position = new Vector3(
                                                                 relativeX + 0.5f,
                                                                 this.transform.position.y,
-                                                                selectTransform.z
+                                                                this.transform.position.z - 2 * Time.deltaTime
                                                              );    
-                        activeX = true;
-                        activeZ = false;
+                          if(this.transform.position.z < selectTransform.z)
+                        {
+                            activeX = true;
+                            activeZ = false;
+                        }
                     }
                 }
             }
@@ -251,7 +213,7 @@ public class PlayerMovement : MonoBehaviour
                 else
                 {
                     this.transform.position = new Vector3(
-                                                            selectTransform.x,
+                                                            this.transform.position.x - 2 * Time.deltaTime,
                                                             this.transform.position.y,
                                                             selectTransform.z
                                                          );  
@@ -268,25 +230,28 @@ public class PlayerMovement : MonoBehaviour
                if(activeX)
             {
 
-                if(this.transform.position.x < selectTransform.x)
-                {
-                    this.transform.position = new Vector3(
-                                                            this.transform.position.x + 2 * Time.deltaTime,
-                                                            this.transform.position.y,
-                                                            this.transform.position.z
-                                                         );    
-                }
-                else
-                {
-                    this.transform.position = new Vector3(
-                                                            selectTransform.x,
-                                                            this.transform.position.y,
-                                                            relativeZ + 0.5f
-                                                         );  
-                    activeZ = true;
-                    activeX = false;
-                }
                
+                    if(this.transform.position.x < selectTransform.x)
+                    {
+                        this.transform.position = new Vector3(
+                                                                this.transform.position.x + 2 * Time.deltaTime,
+                                                                this.transform.position.y,
+                                                                this.transform.position.z
+                                                             );    
+                    }
+                    else
+                    {
+                        this.transform.position = new Vector3(
+                                                                this.transform.position.x - 2 * Time.deltaTime,
+                                                                this.transform.position.y,
+                                                                relativeZ + 0.5f
+                                                             );  
+                        if(this.transform.position.x < selectTransform.x)
+                        {
+                            activeZ = true;
+                            activeX = false;
+                        }
+                    }
             }
             if(activeZ)
             {
@@ -305,7 +270,7 @@ public class PlayerMovement : MonoBehaviour
                         this.transform.position = new Vector3(
                                                                 selectTransform.x,
                                                                 this.transform.position.y,
-                                                                selectTransform.z
+                                                                this.transform.position.z - 2 * Time.deltaTime
                                                              );    
                         transformOnVertical=false;
                         movementOn = true;
@@ -316,4 +281,21 @@ public class PlayerMovement : MonoBehaviour
          
         }
     }
+void SetStatusZ()
+{
+    movementOn=false;
+    translationX = 0f;
+    translationZ = 0f;
+    transformOn = true;
+    activeZ=true;
 }
+void SetStatusX()
+{
+     movementOn=false;
+     translationX = 0f;
+     translationZ = 0f;
+     transformOnVertical = true;
+     activeX=true;
+}
+}
+
