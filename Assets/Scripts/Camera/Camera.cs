@@ -12,11 +12,6 @@ public class Camera : MonoBehaviour
     public float distanceY;
     public float rotationX;
 
-    void Awake()
-    {
-    
-    }
-
     // Update is called once per frame
     void Update()
     {

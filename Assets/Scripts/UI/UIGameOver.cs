@@ -9,10 +9,13 @@ public class UIGameOver : MonoBehaviour
     private Text ScoreText;
     [SerializeField]
     private Text LifeText;
+    [SerializeField]
+    private Text HighScore;
 
     private int FinalScore;
     private int FinalLife;
     private GameManager GM;
+    private int FinalHighScore;
 
     // Start is called before the first frame update
     void Awake()
@@ -26,7 +29,11 @@ public class UIGameOver : MonoBehaviour
             GM = GameManager.Instance;
         }
         FinalScore = GM.GetScore();
+        GM.SetScore(0);
         FinalLife = GM.GetLife();
+        GM.SetLife(2);
+        FinalHighScore = GM.GetHighScore();
+
     }
 
     // Update is called once per frame
@@ -40,6 +47,10 @@ public class UIGameOver : MonoBehaviour
         if (LifeText)
         { 
             LifeText.text = "Life: " + FinalLife;
+        }
+        if(HighScore)
+        {
+            HighScore.text = "HighScore: " + FinalHighScore.ToString();
         }
     }
     void Update()

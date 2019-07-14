@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9091178935305362163}
   - component: {fileID: 284338813095951793}
   - component: {fileID: 3938527020551177492}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Bomb
   m_TagString: Bomb
   m_Icon: {fileID: 0}

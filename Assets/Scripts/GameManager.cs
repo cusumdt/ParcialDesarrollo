@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
      private int life;
      [SerializeField]
     private int score;
+    private int highScore;
 
      void Awake()
         {
@@ -38,9 +39,17 @@ public class GameManager : MonoBehaviour
     {
         score += cant;
     }
+    public void SetScore( int cant )
+    {
+        score = cant;
+    }
     public int GetScore()
     {
         return score;
+    }
+    public int GetHighScore()
+    {
+        return highScore;
     }
     
     // Update is called once per frame
@@ -49,7 +58,10 @@ public class GameManager : MonoBehaviour
         if(life <= 0)
         {
             SceneManager.LoadScene("PFinal");
-            life = 2;
+        }
+        if(score>highScore)
+        {
+            highScore = score;
         }
     }
     public static GameManager Instance

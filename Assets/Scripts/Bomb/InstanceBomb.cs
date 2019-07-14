@@ -11,7 +11,7 @@ public class InstanceBomb : MonoBehaviour
 
     void Awake()
     {
-        bomb =  Instantiate(prefabBomb, new Vector3(GetComponent<PlayerMovement>().relativeX+0.5f, 1f, GetComponent<PlayerMovement>().relativeZ+0.5f), Quaternion.identity);
+        bomb =  Instantiate(prefabBomb, new Vector3(1f, 1f, 1f), Quaternion.identity);
     }
 
     void Start()

@@ -23,6 +23,6 @@ public class UIStartButton : MonoBehaviour
         {
             GameManager.Instance.SetLife(2);
         }
-        SceneManager.LoadScene("PJuego");
+        SceneManager.LoadScene("PCarga");
     }
 }

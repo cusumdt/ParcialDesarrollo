@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
+    private const int ghostPoint = 400;
   public enum EnemyState
     {
         Idle,
@@ -68,7 +69,8 @@ public class Enemy : MonoBehaviour
          if(collision.gameObject.CompareTag("GeneralWall")
          ||collision.gameObject.CompareTag("Bomb")
          ||collision.gameObject.CompareTag("DestructibleWall")
-         ||collision.gameObject.CompareTag("Enemy"))
+         ||collision.gameObject.CompareTag("Enemy")
+         ||collision.gameObject.CompareTag("EdibleEnemy"))
          {
              switch (direccion)
              {
@@ -86,9 +88,17 @@ public class Enemy : MonoBehaviour
                  break;
              }
          }
+         
          if(collision.gameObject.CompareTag("Player"))
          {
-              stats.GetComponent<GameManager>().SubtractLife(1);
+             if(this.gameObject.tag == "Enemy")
+             {
+                stats.GetComponent<GameManager>().SubtractLife(1);
+             }else
+             {
+                stats.GetComponent<GameManager>().AddScore( ghostPoint );
+                this.gameObject.SetActive(false);
+             }
          }
 
      }

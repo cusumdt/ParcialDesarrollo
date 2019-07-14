@@ -18,7 +18,6 @@ public class CreateWall : MonoBehaviour
     private bool generateWall=true;
     [SerializeField]
     private int cantWallDefeat = 0;
-    // Start is called before the first frame update
     void Awake()
     {
 
@@ -31,13 +30,18 @@ public class CreateWall : MonoBehaviour
             {
                 if(Walls[j]!= null)
                 {
-                    if(randomX == Walls[j].transform.position.x && randomZ == Walls[j].transform.position.z 
-                    || randomX == 1.5f && randomZ == 1.5f 
-                    || randomX == 1.5f && randomZ == 2.5f
-                    || randomX == 0.5f && randomZ == 1.5f 
-                    || randomX == 0.5f && randomZ == 0.5f  )
+                    bool blockPosition = 
+                    (
+                        randomX == Walls[j].transform.position.x && randomZ == Walls[j].transform.position.z 
+                        || randomX == 1.5f && randomZ == 1.5f 
+                        || randomX == 0.5f && randomZ == 2.5f
+                        || randomX == 0.5f && randomZ == 1.5f 
+                        || randomX == 0.5f && randomZ == 0.5f
+                        || randomX == 0.5f && randomZ == 3.5f
+                    );
+                    if(blockPosition)
                     {
-                        j=10;
+                        j=cantWall+1;
                         i--;
                         generateWall = false;
                     }
@@ -52,7 +56,7 @@ public class CreateWall : MonoBehaviour
                 if((int)randomZ % 2 != 0)
                 {
                     if(randomX != 1.5f && randomZ != 1.5f 
-                    || randomX != 1.5f && randomZ != 2.5f
+                    || randomX != 0.5f && randomZ != 2.5f
                     || randomX != 0.5f && randomZ != 1.5f 
                     || randomX != 0.5f && randomZ != 0.5f)
                     {
@@ -66,16 +70,10 @@ public class CreateWall : MonoBehaviour
             }
         
         }
-        randomX = Random.Range(0,9);
+        randomX = Random.Range(0,cantWall);
         instancePlatform=Instantiate(platform, new Vector3 (Walls[(int)randomX].transform.position.x,0.5f,Walls[(int)randomX].transform.position.z),Quaternion.identity);
 
     }
-    void Start()
-    {
-       
-    }
-
-    // Update is called once per frame
     void Update()
     {
        cantWallDefeat = 0;
@@ -86,7 +84,7 @@ public class CreateWall : MonoBehaviour
                 cantWallDefeat++;
             }
         }
-        if(cantWallDefeat == 10)
+        if(cantWallDefeat == cantWall)
         {
             instancePlatform.GetComponent<Platform>().active=true;
         }

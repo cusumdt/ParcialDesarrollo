@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/PMenu.unity
     guid: a6a6c16ee6eab9a4791cd2a9cd5622dd
   - enabled: 1
+    path: Assets/Scenes/PCarga.unity
+    guid: fb6dd9cadf615c246b93a0a6c260ab41
+  - enabled: 1
     path: Assets/Scenes/PJuego.unity
     guid: c1f1ff31ea3fb5747bbeac0d2fb317b6
   - enabled: 1
