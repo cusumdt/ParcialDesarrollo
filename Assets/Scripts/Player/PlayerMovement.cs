@@ -9,18 +9,17 @@ public class PlayerMovement : MonoBehaviour
         forward, back, left, right, none,
     }
 
-    private const float speed = 2f;
+
     private Vector3 startPosition= new Vector3(0.5f,1f,0.5f);
     private GameObject Manager;
     private bool reset = true;
-
-    private float Speed;
+    public float Speed;
     Vector2 Movement;
     private Directions MoveDir;
     Directions TurnAlignTo = Directions.none;
     private const float CenterPosition = 0.5f;
-    private const float UpperLimitForTurn = 0.60f;
-    private const float LowerLimitForTurn = 0.40f;
+    private const float MaxLimitForTurn = 0.60f;
+    private const float MinLimitForTurn = 0.40f;
     private bool[] PosibleMovement = new bool[(int)Directions.none];
     private const float RayDistance = 0.51f;
 
@@ -35,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
         {
             PosibleMovement[i] = true;
         }
-        Speed = speed;
         this.transform.position = startPosition;
         Manager = GameObject.Find("GameManager");
     }
@@ -125,12 +123,12 @@ public class PlayerMovement : MonoBehaviour
         {
             case Directions.back:
             case Directions.forward:
-                if (roundedX > UpperLimitForTurn)
+                if (roundedX > MaxLimitForTurn)
                 {
                     TurnAlignTo = Directions.left;
                     return true;
                 }
-                else if (roundedX < LowerLimitForTurn)
+                else if (roundedX < MinLimitForTurn)
                 {
                     TurnAlignTo = Directions.right;
                     return true;
@@ -142,12 +140,12 @@ public class PlayerMovement : MonoBehaviour
                 }
             case Directions.right:
             case Directions.left:
-                if (roundedZ > UpperLimitForTurn)
+                if (roundedZ > MaxLimitForTurn)
                 {
                     TurnAlignTo = Directions.back;
                     return true;
                 }
-                else if (roundedZ < LowerLimitForTurn)
+                else if (roundedZ < MinLimitForTurn)
                 {
                     TurnAlignTo = Directions.forward;
                     return true;
