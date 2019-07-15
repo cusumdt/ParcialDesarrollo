@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {   
     private enum Directions
     {
-        forward, back, left, right, none,
+        forward, back, left, right, cant,
     }
 
 
@@ -16,21 +16,24 @@ public class PlayerMovement : MonoBehaviour
     public float Speed;
     Vector2 Movement;
     private Directions MoveDir;
-    Directions TurnAlignTo = Directions.none;
+    Directions TurnAlignTo = Directions.cant;
     private const float CenterPosition = 0.5f;
     private const float MaxLimitForTurn = 0.60f;
     private const float MinLimitForTurn = 0.40f;
-    private bool[] PosibleMovement = new bool[(int)Directions.none];
+
+    private bool[] PosibleMovement = new bool[(int)Directions.cant];
+
     private const float RayDistance = 0.51f;
 
     public LayerMask RaycastLayer;
 
     public int relativeX;
     public int relativeZ;
+
     void Start()
     {
          MoveDir = Directions.forward;
-        for(int i=0;i<(int)Directions.none; i++)
+        for(int i=0;i<(int)Directions.cant; i++)
         {
             PosibleMovement[i] = true;
         }
@@ -70,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            MoveDir = Directions.none;
+            MoveDir = Directions.cant;
         }
     }
 
@@ -101,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             TurnOnCorner();
-            TurnAlignTo = Directions.none;
+            TurnAlignTo = Directions.cant;
         }
     }
 
@@ -135,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
-                    TurnAlignTo = Directions.none;
+                    TurnAlignTo = Directions.cant;
                     return false;
                 }
             case Directions.right:
@@ -152,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
-                    TurnAlignTo = Directions.none;
+                    TurnAlignTo = Directions.cant;
                     return false;
                 }
             default:
