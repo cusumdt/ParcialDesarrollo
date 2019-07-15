@@ -9,10 +9,9 @@ public class PlayerMovement : MonoBehaviour
         forward, back, left, right, cant,
     }
 
-
+    private bool reset = true;
     private Vector3 startPosition= new Vector3(0.5f,1f,0.5f);
     private GameObject Manager;
-    private bool reset = true;
     public float Speed;
     Vector2 Movement;
     private Directions MoveDir;

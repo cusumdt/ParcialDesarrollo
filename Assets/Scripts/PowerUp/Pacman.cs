@@ -11,7 +11,8 @@ public class Pacman : MonoBehaviour
     public float time;
     public GameObject[] enemy;
     public bool transformation;
-
+    public Material ghostMat;
+    public Material enemyMat;
     void Awake()
     {
         powerOn=false;
@@ -28,6 +29,8 @@ public class Pacman : MonoBehaviour
                 for (int i = 0; i < enemy.Length; i++)
                 {
                     enemy[i].gameObject.tag = "EdibleEnemy";
+                    enemy[i].GetComponent<Renderer>().material = ghostMat;
+                   
                 }
                 transformation = false;
             }
@@ -40,6 +43,7 @@ public class Pacman : MonoBehaviour
                 for (int i = 0; i < enemy.Length; i++)
                 {
                     enemy[i].gameObject.tag = "Enemy";
+                    enemy[i].GetComponent<Renderer>().material = enemyMat;
                 }
             }
         }

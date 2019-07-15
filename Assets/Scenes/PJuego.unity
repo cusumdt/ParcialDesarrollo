@@ -1918,6 +1918,8 @@ MonoBehaviour:
   - {fileID: 1271137181}
   - {fileID: 1542614357}
   transformation: 0
+  ghostMat: {fileID: 2100000, guid: 7a1374a49c5254046a833b4a9f800b4f, type: 2}
+  enemyMat: {fileID: 2100000, guid: 76810a9c0e73b41428bb38dbca2e36b0, type: 2}
 --- !u!4 &797197905
 Transform:
   m_ObjectHideFlags: 0
@@ -3478,7 +3480,7 @@ GameObject:
   - component: {fileID: 1551569566}
   - component: {fileID: 1551569565}
   m_Layer: 0
-  m_Name: DestructibleWallCreator
+  m_Name: DestructibleWallController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
